@@ -6,8 +6,9 @@
     "start": "node dist/main.js",
     "start:dev": "nest start --watch",
     "build": "nest build",
-    "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "node prisma/seed.cjs"
+    "prisma:seed": "node prisma/seed.cjs",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
