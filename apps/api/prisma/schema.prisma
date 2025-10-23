@@ -1,0 +1,88 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  DISPATCHER
+  DRIVER
+}
+
+enum ShipmentStatus {
+  CREATED
+  IN_TRANSIT
+  DELIVERED
+}
+
+enum CheckpointType {
+  CHECKIN
+  TRACK
+  CHECKOUT
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role
+  createdAt    DateTime @default(now())
+  shipments    Shipment[] @relation("UserShipments")
+}
+
+model DistributionCenter {
+  id        String  @id @default(cuid())
+  name      String
+  address   String
+  lat       Float
+  lng       Float
+  createdAt DateTime @default(now())
+  shipments Shipment[]
+}
+
+model Shipment {
+  id              String   @id @default(cuid())
+  code            String   @unique
+  description     String
+  status          ShipmentStatus @default(CREATED)
+  pickupDcId      String
+  pickupDc        DistributionCenter @relation(fields: [pickupDcId], references: [id])
+  deliveryAddress String
+  deliveryLat     Float
+  deliveryLng     Float
+  deliveryRadiusM Int      @default(100)
+  driverId        String
+  driver          User     @relation("UserShipments", fields: [driverId], references: [id])
+  checkpoints     Checkpoint[]
+  proof           DeliveryProof?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Checkpoint {
+  id         String   @id @default(cuid())
+  shipmentId String
+  shipment   Shipment  @relation(fields: [shipmentId], references: [id])
+  type       CheckpointType
+  lat        Float
+  lng        Float
+  accuracy   Float?
+  timestamp  DateTime  @default(now())
+}
+
+model DeliveryProof {
+  id         String   @id @default(cuid())
+  shipmentId String   @unique
+  shipment   Shipment  @relation(fields: [shipmentId], references: [id])
+  photoUrl   String
+  lat        Float
+  lng        Float
+  takenAt    DateTime @default(now())
+  notes      String?
+}

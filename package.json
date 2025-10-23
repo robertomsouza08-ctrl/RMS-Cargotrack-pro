@@ -1,0 +1,15 @@
+
+{
+  "name": "rms-cargotrack-pro",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:api": "npm --prefix apps/api run start:dev",
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:mobile": "npm --prefix apps/mobile run start",
+    "build:api": "npm --prefix apps/api run build",
+    "build:web": "npm --prefix apps/web run build",
+    "prisma:migrate": "npm --prefix apps/api run prisma:migrate",
+    "prisma:seed": "npm --prefix apps/api run prisma:seed"
+  }
+}

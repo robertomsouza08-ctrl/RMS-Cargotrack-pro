@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "RMS CargoTrack Pro",
+    "slug": "rms-cargotrack-pro",
+    "scheme": "rmscargotrackpro",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash-9x16.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B1B3B"
+    },
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0B1B3B"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

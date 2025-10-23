@@ -1,0 +1,18 @@
+{
+  "name": "rms-mobile",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "expo": "~51.0.9",
+    "expo-location": "^17.0.1",
+    "expo-task-manager": "^11.0.1",
+    "expo-image-picker": "^15.0.1",
+    "react": "18.2.0",
+    "react-native": "0.74.3"
+  }
+}
