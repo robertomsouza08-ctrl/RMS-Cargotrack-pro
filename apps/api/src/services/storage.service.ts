@@ -16,7 +16,7 @@ export class StorageService {
     });
     this.bucket = process.env.S3_BUCKET || 'rms-cargotrack-pro';
   }
-  async upload(file: Express.Multer.File, key: string){
+  async upload(file: any, key: string){
     await this.s3.putObject({ Bucket: this.bucket, Key: key, Body: file.buffer, ContentType: file.mimetype || 'image/jpeg', ACL: 'public-read' }).promise();
     const endpoint = (process.env.S3_PUBLIC_BASE || `${process.env.S3_ENDPOINT}/${this.bucket}`).replace(/\/$/, '');
     return `${endpoint}/${key}`;

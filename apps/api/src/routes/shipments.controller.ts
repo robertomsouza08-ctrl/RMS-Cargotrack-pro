@@ -46,7 +46,7 @@ export class ShipmentsController {
 
   @Post(':id/checkout')
   @UseInterceptors(FileInterceptor('photo'))
-  async checkout(@Param('id') id: string, @UploadedFile() photo: Express.Multer.File, @Body() body: { lat:number; lng:number; accuracy?:number; notes?:string; }){
+  async checkout(@Param('id') id: string, @UploadedFile() photo: any, @Body() body: { lat:number; lng:number; accuracy?:number; notes?:string; }){
     const s = await this.prisma.shipment.findUnique({ where: { id } });
     if(!s) throw new BadRequestException('Shipment inválido');
     const d = haversine(body.lat, body.lng, s.deliveryLat, s.deliveryLng);
